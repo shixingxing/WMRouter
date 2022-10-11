@@ -6,12 +6,14 @@ dependencies {
     implementation gradleApi()
     implementation localGroovy()
     compileOnly "com.android.tools.build:gradle:$ANDROID_PLUGIN_VERSION"
-    implementation 'commons-io:commons-io:2.6'
-    implementation 'org.javassist:javassist:3.27.0-GA'
+    implementation 'commons-io:commons-io:2.11.0'
+    implementation 'org.javassist:javassist:3.29.2-GA'
     implementation project(":baseplugin")
 }
 
-apply from: '../../gradle_mvn_push.gradle'
+tasks.withType(Copy).all { duplicatesStrategy 'exclude' }
+
+apply from: '../../gradle_mvn_java_push.gradle'
 
 gradlePlugin {
     plugins {

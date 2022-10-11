@@ -199,7 +199,6 @@ WMRouter还提供了ServiceLoader模块。
     ```groovy
     apply plugin: 'com.android.library'
     apply plugin: 'kotlin-android'
-    apply plugin: 'kotlin-android-extensions'
     // 添加kapt插件
     apply plugin: 'kotlin-kapt'
 

@@ -1,3 +1,4 @@
+apply plugin: 'java-library'
 apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
@@ -10,21 +11,20 @@ def getRepositoryUrl() {
     return isReleaseBuild() ? RELEASE_REPOSITORY_URL : SNAPSHOT_REPOSITORY_URL
 }
 
-task generateSourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier 'sources'
+
+java {
+//    withJavadocJar()
+    withSourcesJar()
 }
 
 afterEvaluate {
     publishing {
         publications {
-            Production(MavenPublication) {
-                from components.release
+            mavenJava(MavenPublication) {
+                from components.java
                 groupId = GROUP
                 artifactId = POM_ARTIFACT_ID
                 version = VERSION_NAME
-                // 上传source，这样使用放可以看到方法注释
-                artifact generateSourcesJar
             }
         }
         repositories {
