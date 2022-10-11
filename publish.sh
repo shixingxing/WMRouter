@@ -1,0 +1,17 @@
+# 发布到JCenter
+# 发布SNAPSHOT 版本，直接在版本号后面添加SNAPSHOT 后缀即可。
+# 用法：
+# 1. 在local.properties中配置好bintray账号和apikey
+#      NEXUS_USERNAME=xxx
+#      NEXUS_PASSWORD=xxxx
+# 2. 更新gradle.properties中的版本号（否则可能会覆盖已发布版本！！！）
+# 3. 将build.gradle - buildscript - dependencies中的
+#      classpath "com.sankuai.waimai.router:plugin:$VERSION_NAME"
+#      改为一个已经发布的版本（否则后面发布时会编译不过）
+# 4. 执行此脚本发布JCenter
+# 5. 验证新版本，把build.gradle改回来
+# 6. git打tag，更新文档(README、CHANGELOG)，github编辑Release信息
+
+./gradlew clean :interfaces:publishMavenJavaPublicationToMavenRepository :router:publishProductionPublicationToMavenRepository :compiler:publishMavenJavaPublicationToMavenRepository  --stacktrace
+cd WmPlugin
+./gradlew clean :baseplugin:publishMavenJavaPublicationToMavenRepository :plugin:publishMavenJavaPublicationToMavenRepository  --stacktrace
